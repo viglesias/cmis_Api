@@ -7,7 +7,7 @@ module Atom
       
       loadable!
       namespace Atom::NAMESPACE
-      element :capabilityACL, :capabilityAllVersionsSearchable, :capabilitychanges, :capabilityContentStreamUpdatability, :capabilitygetDescendants
+      element :capabilityACL, :capabilityAllVersionsSearchable, :capabilitychanges, :capabilityContentStreamUpdatability, :capabilitygetDescendants, :changesIncomplete
       element :capabilityGetFolderTree, :capabilityMultifiling, :capabilityPWCSearchable, :capabilityPWCUpdatable, :capabilityQuery, :capabilityRenditions
       element :capabilityUnfiling, :capabilityVersionSpecificFiling, :capabilityJoin
       element :updated, :published, :class => Time, :content_only => true

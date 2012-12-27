@@ -8,14 +8,14 @@ module Api
 		#before_filter :restrict_access
 		include ActionController::HttpAuthentication::Basic::ControllerMethods
 		include ActionController::MimeResponds             
-		http_basic_authenticate_with :name => "admin", :password => "admin"
+		#http_basic_authenticate_with :name => "admin", :password => "admin"
 		
-		def index
+		def index			
  			 cmis = Atom::Cmis.new			  
 			  Atom::Cmis.add_extension_namespace :app, "http://www.w3.org/2007/app"
 			  Atom::Cmis.add_extension_namespace :atom, "http://www.w3.org/2005/Atom"
 			  Atom::Cmis.add_extension_namespace :cra, "http://docs.oasis-open.org/ns/cmis/restatom/200908/"
-			  Atom::Cmis.add_extension_namespace :ns, "http://docs.oasis-open.org/ns/cmis/core/200908/"	
+			  Atom::Cmis.add_extension_namespace :c, "http://docs.oasis-open.org/ns/cmis/core/200908/"	
 			  Atom::Cmis.add_extension_namespace :cm, "http://docs.oasis-open.org/ns/cmis/messaging/200908/"				  
 			  Atom::Cmis.add_extension_namespace :alf, "http://www.alfresco.org"			  
 			  cmis.workspaces << Atom::Workspace.new do |w|
@@ -23,12 +23,59 @@ module Api
 			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","repositoryId"] << "af0e3a5a-628f-41a5-8a82-75006933331d"
 			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","repositoryName"] << "Nombre del repositorio 1 "
 			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","repositoryURL"] << "urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af7"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","cmisVersionSupported"] << "1.0"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","repositoryDescription"] << "Descripción repositorio 1"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","vendorName"] << "Vendorname repositorio 1"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","productName"] << "ProductName repositorio 1"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","vendorName"] << "Vendorname repositorio 1"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","productVersion"] << "Vendorname repositorio 1"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","rootFolderId"] << "http://localhost:3000/api/cmis/rootFolder/1"
+			  	  	f.capabilities << Atom::Capability.new do |c|
+			  	  		c.capabilityACL = "CapabilityACL "
+			  	  		c.capabilityAllVersionsSearchable = "bíusquedas por Capability"
+			  	  		c.capabilitychanges = "Cambios en capability"
+			  	  		c.capabilityContentStreamUpdatability = "capabilityContentStreamActualización"
+			  	  		c.capabilitygetDescendants = "Hijos capability"
+      					c.capabilityGetFolderTree = "Obtener arbol de directorios"
+      					c.capabilityMultifiling = "Multifiling"
+      					c.capabilityPWCSearchable = "PWC Sercheable"
+      					c.capabilityPWCUpdatable = "POCUpdatable"
+      					c.capabilityQuery = "Query"
+      					c.capabilityRenditions = "Capability Redention"
+      					c.capabilityUnfiling = "Unifiling"
+      					c.capabilityVersionSpecificFiling = "Version specific"
+      					c.capabilityJoin = "Capability Join"
+			  	  	end
 			  	 end
 			  	w.repositoryInfo << repositoryInfo
 			  	repositoryInfo = Atom::RepositoryInfo.new do |f|
 			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","repositoryId"] << "af0e3a5a-628f-41a5-8a82-75006933331c"
 			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","repositoryName"] << "Nombre del repositorio 2"
 			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","repositoryURL"] << "urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af8"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","cmisVersionSupported"] << "1.0"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","repositoryDescription"] << "Descripción repositorio 2"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","vendorName"] << "Vendorname repositorio 2"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","productName"] << "ProductName repositorio 2"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","vendorName"] << "Vendorname repositorio 2"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","productVersion"] << "Vendorname repositorio 2"
+			  	  	f["http://docs.oasis-open.org/ns/cmis/core/200908/","rootFolderId"] << "http://localhost:3000/api/cmis/rootFolder/2"
+			  	  	f.capabilities << Atom::Capability.new do |c|
+			  	  		c.capabilityACL = "CapabilityACL "
+			  	  		c.capabilityAllVersionsSearchable = "bíusquedas por Capability"
+			  	  		c.capabilitychanges = "Cambios en capability"
+			  	  		c.capabilityContentStreamUpdatability = "capabilityContentStreamActualización"
+			  	  		c.capabilitygetDescendants = "Hijos capability"
+      					c.capabilityGetFolderTree = "Obtener arbol de directorios"
+      					c.capabilityMultifiling = "Multifiling"
+      					c.capabilityPWCSearchable = "PWC Sercheable"
+      					c.capabilityPWCUpdatable = "POCUpdatable"
+      					c.capabilityQuery = "Query"
+      					c.capabilityRenditions = "Capability Redention"
+      					c.capabilityUnfiling = "Unifiling"
+      					c.capabilityVersionSpecificFiling = "Version specific"
+      					c.capabilityJoin = "Capability Join"
+			  	  	end
+   
 			  	 end
 			  	w.repositoryInfo << repositoryInfo			  
 			  end			  
@@ -37,7 +84,6 @@ module Api
 				format.xml {render xml: cmis.to_xml(false,"service","http://www.w3.org/2007/app",nil)}
 			end
  		end
-
 
 
 		def repositoryInfo
